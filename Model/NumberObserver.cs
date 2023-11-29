@@ -10,7 +10,7 @@ namespace HW2.Model
     {
         public int PrintOverFlowNumber()
         {
-            return _overFlowNumber - _department.CalculateSum();
+            return _overFlowNumber - _departments.Sum(x => x.CalculateSum());
         }
     }
 }

@@ -16,9 +16,12 @@ namespace HW2.ViewModel
         PrintObserver printObserver = new PrintObserver();
         NumberObserver numberObserver = new NumberObserver();
         Company company;
+        List<Employee> employeesToAdd = new List<Employee>();
+        List<Department> departmentsToAdd = new List<Department>();
+
 
         [ObservableProperty]
-        ObservableCollection<String> employees;
+        ObservableCollection<string> employees;
 
         [ObservableProperty]
         bool isEmployeePicked = true;
@@ -31,6 +34,9 @@ namespace HW2.ViewModel
 
         [ObservableProperty]
         bool isDepartmentListPicked;
+
+        [ObservableProperty]
+        int max;
 
         [ObservableProperty]
         string name;
@@ -54,11 +60,34 @@ namespace HW2.ViewModel
                 employee.Department = company.MainDepartment.FindDepartment(DepartmentName);
                 company.MainDepartment.AddEntity(employee);
                 Employees = new ObservableCollection<String>(company.MainDepartment.ListEntities());
+                MessageArea = $"Added {employee.Name}";
             }
             else
             {
                 MessageArea = "Department not existing, add it first!";
             }
+            MessageAreaUpdate();
+        }
+
+        [RelayCommand]
+        void AddEmployees()
+        {
+            Employee employee = new Employee { Name = Name, StartOfWork = StartOfWork };
+            bool isDepartmentExists = company.MainDepartment.IsDepartmentExsists(DepartmentName);
+            if (isDepartmentExists)
+            {
+                employee.Department = company.MainDepartment.FindDepartment(DepartmentName);
+                employeesToAdd.Add(employee);
+                MessageArea += $"Added {employee.Name} to {employee.Department.Name}\nStart of Work {employee.StartOfWork}\n";
+            }
+
+        }
+
+        [RelayCommand]
+        void ConfirmAddingEmployees()
+        {
+            company.MainDepartment.AddEntity(employeesToAdd);
+            Employees = new ObservableCollection<String>(company.MainDepartment.ListEntities());
             MessageAreaUpdate();
         }
 
@@ -72,12 +101,38 @@ namespace HW2.ViewModel
             }
             else
             {
-                Department department = new Department(company.MainDepartment.FindDepartment(DepartmentName)){ Name = Name };
-                company.MainDepartment.AddEntity(null, department);
+                Department department = new Department(company.MainDepartment.FindDepartment(DepartmentName)){ Name = Name, MaxNumberOfEmployees = Max};
+                company.MainDepartment.AddEntity(department);
                 Employees = new ObservableCollection<String>(company.MainDepartment.ListEntities());
             }
             MessageAreaUpdate();
         }
+
+        [RelayCommand]
+        void AddDepartments()
+        {
+            bool isDepartmentExists = company.MainDepartment.IsDepartmentExsists(Name);
+            if (isDepartmentExists)
+            {
+                MessageArea = "Department already exists";
+            }
+            else
+            {
+                Department department = new Department(company.MainDepartment.FindDepartment(DepartmentName)){ Name = Name, MaxNumberOfEmployees = Max};
+                departmentsToAdd.Add(department);
+                MessageArea += $"Added {department.Name}, Max employees here :{department.MaxNumberOfEmployees}\n";
+            }
+
+        }
+
+        [RelayCommand]
+        void ConfirmAddingDepartments()
+        {
+            company.MainDepartment.AddEntity(departmentsToAdd);
+            Employees = new ObservableCollection<String>(company.MainDepartment.ListEntities());
+            MessageAreaUpdate();
+        }
+
 
         private void MessageAreaUpdate()
         {
@@ -85,10 +140,6 @@ namespace HW2.ViewModel
             {
                 company.Notify();
                 MessageArea = $"{printObserver.PrintData()}\n\n{numberObserver.PrintOverFlowNumber}";
-            }
-            else
-            {
-                MessageArea = string.Empty;
             }
         }
         public MainViewModel()

@@ -26,8 +26,8 @@ namespace HW2.Model
             _observers.
                 ForEach(x => x.Update(
                     _mainDepartment.NotificationData.OverFlowNumber,
-                    _mainDepartment.NotificationData.Department,
-                    _mainDepartment.NotificationData.Employee));
+                    _mainDepartment.NotificationData.Departments,
+                    _mainDepartment.NotificationData.Employees));
         }
     }
 }

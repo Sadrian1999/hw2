@@ -49,34 +49,58 @@ namespace HW2.Model
             }
             return null;
         }
-        public void AddEntity(Employee employee = null, Department department = null)
+        public void AddEntity(Employee employee)
         {
-            int overFlowNumber;
-            if (employee != null)
+            int overFlowNumber = CalculateSum() + employee.CalculateSum();
+            if (employee != null || overFlowNumber <= MaxNumberOfEmployees)
             {
-                overFlowNumber = CalculateSum() + employee.CalculateSum();
-                if (overFlowNumber <= MaxNumberOfEmployees)
-                {
-                    FindDepartment(employee.Department.Name).Employees.Add(employee);    
-                }
-                else
-                {
-                    NotifyParent(new NotificationData(overFlowNumber, null, employee));
-                }
+                FindDepartment(employee.Department.Name).Employees.Add(employee);
             }
-            else if (department != null) 
+            else
             {
-                overFlowNumber = CalculateSum() + department.CalculateSum();
-                if (overFlowNumber <= MaxNumberOfEmployees)
-                {
-                    FindDepartment(department.ParentDepartment.Name).Departments.Add(department);    
-                }
-                else
-                {
-                    NotifyParent(new NotificationData(overFlowNumber, department));
-                }
+                NotifyParent(new NotificationData(overFlowNumber, null, employee));
+            }
+            
+        }        
+        public void AddEntity(Department department)
+        {
+            int overFlowNumber = CalculateSum() + department.CalculateSum();
+            if (department != null|| overFlowNumber <= MaxNumberOfEmployees)
+            {
+                FindDepartment(department.ParentDepartment.Name).Departments.Add(department);    
+            }
+            else
+            {
+                NotifyParent(new NotificationData(overFlowNumber, department));
             }
         }
+
+        public void AddEntity(List<Department> departments)
+        {
+            int overFlowNumber = CalculateSum() + departments.Sum(x => x.CalculateSum());
+            if (departments != null|| overFlowNumber <= MaxNumberOfEmployees)
+            {
+                FindDepartment(departments[0].ParentDepartment.Name).Departments.AddRange(departments);    
+            }
+            else
+            {
+                NotifyParent(new NotificationData(overFlowNumber, departments));
+            }
+        }
+        public void AddEntity(List<Employee> employees)
+        {
+            int overFlowNumber = CalculateSum() + employees.Count;
+            if (employees != null|| overFlowNumber <= MaxNumberOfEmployees)
+            {
+                FindDepartment(employees[0].Department.Name).Employees.AddRange(employees);    
+            }
+            else
+            {
+                NotifyParent(new NotificationData(overFlowNumber, null, employees));
+            }
+        }
+
+        
         public void RemoveEntity(Department department = null, Employee employee = null)
         {
             if (employee != null)

@@ -9,13 +9,13 @@ namespace HW2.Model
     public abstract class BaseCompanyObserver : IObserver
     {
         protected int _overFlowNumber;
-        protected Employee _employee;
-        protected Department _department;
-        public void Update(int overFlowNumber, Department department = null, Employee employee = null)
+        protected List<Employee> _employees;
+        protected List<Department> _departments;
+        public void Update(int overFlowNumber, List<Department> departments = null, List<Employee> employees = null)
         {
             _overFlowNumber = overFlowNumber;
-            _employee = employee;
-            _department = department;
+            _employees = employees;
+            _departments = departments;
         }
 
     }

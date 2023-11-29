@@ -9,18 +9,25 @@ namespace HW2.Model
     public class NotificationData
     {
         private int _overFlowNumber;
-        private Employee _employee;
-        private Department _department;
+        private List<Employee> _employees;
+        private List<Department> _departments;
 
         public int OverFlowNumber { get => _overFlowNumber; }
-        public Employee Employee { get => _employee; }
-        public Department Department { get => _department; }
+        public List<Employee> Employees { get => _employees; }
+        public List<Department> Departments { get => _departments; }
 
         public NotificationData(int overFlowNumber, Department department = null, Employee employee = null)
         {
             _overFlowNumber = overFlowNumber;
-            _employee = employee;
-            _department = department;
+            _employees.Add(employee);
+            _departments.Add(department);
+        }
+
+        public NotificationData(int overFlowNumber, List<Department> departments = null, List<Employee> employees = null)
+        {
+            _overFlowNumber = overFlowNumber;
+            _employees.AddRange(employees);
+            _departments.AddRange(departments);
         }
     }
 }
