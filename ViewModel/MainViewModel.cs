@@ -16,7 +16,7 @@ namespace HW2.ViewModel
         ObservableCollection<String> employees;
 
         [ObservableProperty]
-        Department department;
+        Department mainDepartment;
 
         [ObservableProperty]
         bool isEmployeePicked = true;
@@ -36,7 +36,8 @@ namespace HW2.ViewModel
         [RelayCommand]
         void AddEmployee()
         {
-            Employees.Add(EmployeeName);
+            Employee employee = new Employee { Name = EmployeeName, StartOfWork = StartOfWork };
+            MainDepartment.AddEntity(new List<Employee> { employee });
         }
 
         [RelayCommand]
@@ -46,7 +47,8 @@ namespace HW2.ViewModel
         }
         public MainViewModel()
         {
-            Employees = new ObservableCollection<String>();
+            MainDepartment = new Department();
+            Employees = new ObservableCollection<String>(MainDepartment.ListEntities());
         }
     }
 }

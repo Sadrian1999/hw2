@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-11-29T03:52:07.362</Modified>
+      <Modified>2023-11-29T04:10:50.161</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-11-29T03:47:16.049</Modified>
+      <Modified>2023-11-29T04:10:14.208</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\HW2.runtimeconfig.json">
       <PackagePath>HW2.runtimeconfig.json</PackagePath>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\HW2.dll">
       <PackagePath>HW2.dll</PackagePath>
-      <Modified>2023-11-29T03:52:06.333</Modified>
+      <Modified>2023-11-29T04:10:49.144</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>HW2.exe</PackagePath>
-      <Modified>2023-11-29T03:52:06.339</Modified>
+      <Modified>2023-11-29T04:10:49.150</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\HW2.deps.json">
       <PackagePath>HW2.deps.json</PackagePath>
