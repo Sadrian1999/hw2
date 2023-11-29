@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HW2.View.Main"
+             xmlns:vm="clr-namespace:HW2.ViewModel"
+             x:DataType="vm:MainViewModel"
+             Title="Main"
+             WidthRequest="600"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid BackgroundColor="WhiteSmoke" ColumnDefinitions="Auto, Auto, Auto, 300" RowDefinitions="Auto, Auto, Auto, Auto, Auto, * ">
+
+        <RadioButton Content="Employee" GroupName="RadioGroup" TextColor="Black" IsChecked="{Binding IsEmployeePicked}" />
+        <RadioButton Content="Department" GroupName="RadioGroup" Grid.Column="1" TextColor="Black" IsChecked="{Binding IsDepartmentPicked}"/>
+        
+        <Label Text="Name" Grid.Row="1" TextColor="Black"/>
+        <Entry WidthRequest="100" Grid.Row="1" Grid.Column="1" BackgroundColor="DimGray" Text="{Binding EmployeeName}"/>
+
+        <Label Text="Department" Grid.Row="2" TextColor="Black" IsEnabled="{Binding IsEmployeePicked}"/>
+        <Entry WidthRequest="100" Grid.Row="2" Grid.Column="1" BackgroundColor="DimGray" IsEnabled="{Binding IsEmployeePicked}" Text="{Binding DepartmentName}"/>
+
+        <Label Text="Starting Date" Grid.Row="3" TextColor="Black" IsEnabled="{Binding IsEmployeePicked}"/>
+        <DatePicker Date="{Binding StartOfWork}" IsEnabled="{Binding IsEmployeePicked}" 
+                    MinimumDate="1999-09-06" MaximumDate="2023-11-01" Format="d" TextColor="Black"
+                    BackgroundColor="AntiqueWhite" Grid.Row="3" Grid.Column="1"/>
+
+        <Button Text="Add Employee" Grid.Row="4" TextColor="Black" WidthRequest="120" 
+                FontSize="12" IsEnabled="{Binding IsEmployeePicked}" Command="{Binding AddEmployeeCommand}"/>
+        <Button Text="Add Department" Grid.Row="4" Grid.Column="1" TextColor="Black" 
+                WidthRequest="125" FontSize="12" IsEnabled="{Binding IsDepartmentPicked}" Command="{Binding AddDepartmentCommand}"/>
+
+        <Label Text="{Binding IsEmployeePicked}" Grid.Row="5" Grid.ColumnSpan="2" TextColor="Black"/>
+        
+        <BoxView Color="Black" WidthRequest="1" VerticalOptions="FillAndExpand" Grid.Column="2" Grid.RowSpan="6" />
+
+        <CollectionView Grid.Column="3" Grid.RowSpan="6" ItemsSource="{Binding Employees}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding .}" WidthRequest="300" TextColor="Black"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+
+
+
+
+    </Grid>
+</ContentPage>
