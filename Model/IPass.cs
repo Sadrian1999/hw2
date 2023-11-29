@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HW2.Model
 {
-    public interface ISubject
+    public interface IPass
     {
-        void Notify();
-        void Subscribe(IObserver observer);
-        void UnSubscribe(IObserver observer);
+        void NotifyParent(NotificationData notificationData);
     }
 }

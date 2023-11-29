@@ -8,6 +8,6 @@ namespace HW2.Model
 {
     public interface IObserver
     {
-        void Update(int overFlowNumber, List<Department> departments = null, List<Employee> employees = null);
+        void Update(int overFlowNumber, Department department = null, Employee employee = null);
     }
 }

@@ -8,32 +8,40 @@
              WidthRequest="600"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid BackgroundColor="WhiteSmoke" ColumnDefinitions="Auto, Auto, Auto, 300" RowDefinitions="Auto, Auto, Auto, Auto, Auto, * ">
+    <Grid BackgroundColor="WhiteSmoke" ColumnDefinitions="Auto, Auto, Auto, 300" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, * ">
 
-        <RadioButton Content="Employee" GroupName="RadioGroup" TextColor="Black" IsChecked="{Binding IsEmployeePicked}" />
+        <RadioButton Content="Employee" GroupName="RadioGroup" TextColor="Black" IsChecked="{Binding IsEmployeePicked}"/>
         <RadioButton Content="Department" GroupName="RadioGroup" Grid.Column="1" TextColor="Black" IsChecked="{Binding IsDepartmentPicked}"/>
-        
-        <Label Text="Name" Grid.Row="1" TextColor="Black"/>
-        <Entry WidthRequest="100" Grid.Row="1" Grid.Column="1" BackgroundColor="DimGray" Text="{Binding EmployeeName}"/>
+        <RadioButton Content="Employees" GroupName="RadioGrop" TextColor="Black" IsChecked="{Binding IsEmployeeListPicked}" Grid.Row="1"/>
+        <RadioButton Content="Departments" GroupName="RadioGrop" TextColor="Black" IsChecked="{Binding IsDepartmentListPicked}" Grid.Row="1" Grid.Column="1"/>
 
-        <Label Text="Department" Grid.Row="2" TextColor="Black" IsEnabled="{Binding IsEmployeePicked}"/>
-        <Entry WidthRequest="100" Grid.Row="2" Grid.Column="1" BackgroundColor="DimGray" IsEnabled="{Binding IsEmployeePicked}" Text="{Binding DepartmentName}"/>
+        <Label Text="Name" Grid.Row="2" TextColor="Black"/>
+        <Entry WidthRequest="100" Grid.Row="2" Grid.Column="1" BackgroundColor="DimGray" Text="{Binding Name}"/>
 
-        <Label Text="Starting Date" Grid.Row="3" TextColor="Black" IsEnabled="{Binding IsEmployeePicked}"/>
+        <Label Text="Department" Grid.Row="3" TextColor="Black"/>
+        <Entry WidthRequest="100" Grid.Row="3" Grid.Column="1" BackgroundColor="DimGray" Text="{Binding DepartmentName}"/>
+
+        <Label Text="Starting Date" Grid.Row="4" TextColor="Black" IsEnabled="{Binding IsEmployeePicked}"/>
         <DatePicker Date="{Binding StartOfWork}" IsEnabled="{Binding IsEmployeePicked}" 
                     MinimumDate="1999-09-06" MaximumDate="2023-11-01" Format="d" TextColor="Black"
-                    BackgroundColor="AntiqueWhite" Grid.Row="3" Grid.Column="1"/>
+                    BackgroundColor="AntiqueWhite" Grid.Row="4" Grid.Column="1"/>
 
-        <Button Text="Add Employee" Grid.Row="4" TextColor="Black" WidthRequest="120" 
+        <Button Text="Add Employee" Grid.Row="5" TextColor="Black" WidthRequest="120" 
                 FontSize="12" IsEnabled="{Binding IsEmployeePicked}" Command="{Binding AddEmployeeCommand}"/>
-        <Button Text="Add Department" Grid.Row="4" Grid.Column="1" TextColor="Black" 
+        <Button Text="Add Department" Grid.Row="5" Grid.Column="1" TextColor="Black" 
                 WidthRequest="125" FontSize="12" IsEnabled="{Binding IsDepartmentPicked}" Command="{Binding AddDepartmentCommand}"/>
-
-        <Label Text="{Binding IsEmployeePicked}" Grid.Row="5" Grid.ColumnSpan="2" TextColor="Black"/>
         
-        <BoxView Color="Black" WidthRequest="1" VerticalOptions="FillAndExpand" Grid.Column="2" Grid.RowSpan="6" />
+        <Button Text="Add Employees" Grid.Row="6" TextColor="Black" WidthRequest="120" 
+                FontSize="12" IsEnabled="{Binding IsEmployeeListPicked}" Command="{Binding AddEmployeeCommand}"/>
+        <Button Text="Add Departments" Grid.Row="6" Grid.Column="1" TextColor="Black" 
+                WidthRequest="125" FontSize="12" IsEnabled="{Binding IsDepartmentListPicked}" Command="{Binding AddDepartmentCommand}"/>
 
-        <CollectionView Grid.Column="3" Grid.RowSpan="6" ItemsSource="{Binding Employees}">
+
+        <Label Text="{Binding MessageArea}" Grid.Row="7" Grid.ColumnSpan="2" TextColor="Black"/>
+        
+        <BoxView Color="Black" WidthRequest="1" VerticalOptions="FillAndExpand" Grid.Column="2" Grid.RowSpan="8" />
+
+        <CollectionView Grid.Column="3" Grid.RowSpan="8" ItemsSource="{Binding Employees}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>

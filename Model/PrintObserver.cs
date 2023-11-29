@@ -11,13 +11,13 @@ namespace HW2.Model
         public string PrintData()
         {
             string str = "";
-            if (_departments != null)
+            if (_department != null)
             {
-                _departments.ForEach(x => str += $"{x.Name};");
+                str += $"{_department.Name}";
             }
             else 
             { 
-                _employees.ForEach(x => str += $"{x.Name};");
+               str += $"{_employee.Name}";
             }
             return str;
         }

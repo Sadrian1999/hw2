@@ -7,42 +7,73 @@ using System.Threading.Tasks;
 
 namespace HW2.Model
 {
-    public class Department : IComponent, ISubject
+    public class Department : IComponent, IPass
     {
         private int _maxNumberOfEmployees;
         private string _name;
         private List<Employee> _employees = new List<Employee>();
         private List<Department> _departments = new List<Department>();
-        private List<IObserver> _observers = new List<IObserver>();
+        private NotificationData _notificationData = null;
+        private Department _parentDepartment;
 
-        public int MaxNumberOfEmployees { get => _maxNumberOfEmployees; set => value = _maxNumberOfEmployees; }
+        public int MaxNumberOfEmployees { get => _maxNumberOfEmployees; set => _maxNumberOfEmployees = value; }
         public string Name { get => _name; set => _name = value; }
+        public List<Department> Departments { get => _departments; set => _departments = value; }
+        public Department ParentDepartment { get => _parentDepartment; }
+        public List<Employee> Employees { get => _employees; set => _employees = value; }
+        public NotificationData NotificationData { get => _notificationData; set => _notificationData = value; }
 
-        public void AddEntity(List<Employee> employees = null, List<Department> departments = null)
+        public Department(Department parent)
         {
-            int overFlowNumber;
-            if (employees != null)
+            _parentDepartment = parent;
+        }
+
+        public bool IsDepartmentExsists(string givenName)
+        {
+            if (givenName == _name) return true;
+            else if (_departments.Count > 0)
             {
-                overFlowNumber = CalculateSum() + employees.Count;
-                if (overFlowNumber < MaxNumberOfEmployees)
+                return _departments.Any(x => x.IsDepartmentExsists(givenName));
+            }
+            else return false;
+        }
+        public Department FindDepartment(string name) 
+        {
+            if (_name == name) return this;
+            else if (_departments.Count > 0)
+            {
+                foreach (var department in _departments) 
                 {
-                    _employees.AddRange(employees);
-                }
-                else
-                {
-                    Notify(overFlowNumber, null, employees);
+                    return department.FindDepartment(name);
                 }
             }
-            else if (departments != null) 
+            return null;
+        }
+        public void AddEntity(Employee employee = null, Department department = null)
+        {
+            int overFlowNumber;
+            if (employee != null)
             {
-                overFlowNumber = CalculateSum() + departments.Sum(x => x.CalculateSum());
-                if (overFlowNumber < MaxNumberOfEmployees)
+                overFlowNumber = CalculateSum() + employee.CalculateSum();
+                if (overFlowNumber <= MaxNumberOfEmployees)
                 {
-                    _departments.AddRange(departments);
+                    FindDepartment(employee.Department.Name).Employees.Add(employee);    
                 }
                 else
                 {
-                    Notify(overFlowNumber, departments);
+                    NotifyParent(new NotificationData(overFlowNumber, null, employee));
+                }
+            }
+            else if (department != null) 
+            {
+                overFlowNumber = CalculateSum() + department.CalculateSum();
+                if (overFlowNumber <= MaxNumberOfEmployees)
+                {
+                    FindDepartment(department.ParentDepartment.Name).Departments.Add(department);    
+                }
+                else
+                {
+                    NotifyParent(new NotificationData(overFlowNumber, department));
                 }
             }
         }
@@ -65,14 +96,9 @@ namespace HW2.Model
         }
         public List<string> ListEntities()
         {
-            List<string> entities = new List<string>();
+            List<string> entities = new() {$"Dep {Name}"};
             _employees.ForEach(x => entities.Add($"Emp {x.Name}"));
-            if (_departments == null)
-            {
-                return null;
-            }
-            entities.Add($"Dep{Name}");
-            _departments.ForEach(x => entities.AddRange(x.ListEntities()));
+            _departments?.ForEach(x => entities.AddRange(x.ListEntities()));
             return entities;
         }
         public string GetEmployeeName(int i)
@@ -83,17 +109,13 @@ namespace HW2.Model
         {
             return _employees.Count + _departments.Sum(x =>x.CalculateSum());
         }
-        public void Notify(int overFlowNumber, List<Department> departments = null, List<Employee> employees = null)
+        public void NotifyParent(NotificationData notificationData)
         {
-            _observers.ForEach(x => x.Update(overFlowNumber, departments, employees));
-        }
-        public void Subscribe(IObserver observer)
-        {
-            _observers.Add(observer);
-        }
-        public void UnSubscribe(IObserver observer)
-        {
-            if (_observers.Contains(observer)) _observers.Remove(observer);
+            if (_parentDepartment == null) _notificationData = notificationData;
+            else
+            {
+                _parentDepartment.NotifyParent(notificationData);
+            }
         }
     }
 }
