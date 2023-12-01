@@ -12,8 +12,8 @@
 
         <RadioButton Content="Employee" GroupName="RadioGroup" TextColor="Black" IsChecked="{Binding IsEmployeePicked}"/>
         <RadioButton Content="Department" GroupName="RadioGroup" Grid.Column="1" TextColor="Black" IsChecked="{Binding IsDepartmentPicked}"/>
-        <RadioButton Content="Employees" GroupName="RadioGrop" TextColor="Black" IsChecked="{Binding IsEmployeeListPicked}" Grid.Row="1"/>
-        <RadioButton Content="Departments" GroupName="RadioGrop" TextColor="Black" IsChecked="{Binding IsDepartmentListPicked}" Grid.Row="1" Grid.Column="1"/>
+        <RadioButton Content="Employees" GroupName="RadioGroup" TextColor="Black" IsChecked="{Binding IsEmployeeListPicked}" Grid.Row="1"/>
+        <RadioButton Content="Departments" GroupName="RadioGroup" TextColor="Black" IsChecked="{Binding IsDepartmentListPicked}" Grid.Row="1" Grid.Column="1"/>
 
         <Label Text="Name" Grid.Row="2" TextColor="Black"/>
         <Entry WidthRequest="100" Grid.Row="2" Grid.Column="1" BackgroundColor="DimGray" Text="{Binding Name}"/>
