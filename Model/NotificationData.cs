@@ -9,8 +9,8 @@ namespace HW2.Model
     public class NotificationData
     {
         private int _overFlowNumber;
-        private List<Employee> _employees;
-        private List<Department> _departments;
+        private List<Employee> _employees = new();
+        private List<Department> _departments = new();
 
         public int OverFlowNumber { get => _overFlowNumber; }
         public List<Employee> Employees { get => _employees; }

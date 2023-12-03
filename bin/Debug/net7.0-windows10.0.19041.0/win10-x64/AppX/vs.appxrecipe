@@ -30,29 +30,29 @@
     <AppXManifest Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-11-29T21:37:57.378</Modified>
+      <Modified>2023-12-03T17:45:47.104</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-11-29T21:22:45.729</Modified>
+      <Modified>2023-12-03T17:39:20.939</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\HW2.runtimeconfig.json">
       <PackagePath>HW2.runtimeconfig.json</PackagePath>
-      <Modified>2023-11-29T03:15:03.032</Modified>
+      <Modified>2023-12-03T17:04:48.005</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\HW2.dll">
       <PackagePath>HW2.dll</PackagePath>
-      <Modified>2023-11-29T21:37:56.373</Modified>
+      <Modified>2023-12-03T17:45:45.971</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>HW2.exe</PackagePath>
-      <Modified>2023-11-29T21:37:56.381</Modified>
+      <Modified>2023-12-03T17:45:45.978</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Programming\c#\HW2\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\HW2.deps.json">
       <PackagePath>HW2.deps.json</PackagePath>
-      <Modified>2023-11-29T03:15:02.981</Modified>
+      <Modified>2023-12-03T17:33:06.711</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\adria\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.11\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>

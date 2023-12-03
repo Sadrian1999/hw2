@@ -52,7 +52,7 @@ namespace HW2.Model
         public void AddEntity(Employee employee)
         {
             int overFlowNumber = CalculateSum() + employee.CalculateSum();
-            if (employee != null || overFlowNumber <= MaxNumberOfEmployees)
+            if (employee != null &&overFlowNumber <= MaxNumberOfEmployees)
             {
                 FindDepartment(employee.Department.Name).Employees.Add(employee);
             }
@@ -65,7 +65,7 @@ namespace HW2.Model
         public void AddEntity(Department department)
         {
             int overFlowNumber = CalculateSum() + department.CalculateSum();
-            if (department != null|| overFlowNumber <= MaxNumberOfEmployees)
+            if (department != null && overFlowNumber <= MaxNumberOfEmployees)
             {
                 FindDepartment(department.ParentDepartment.Name).Departments.Add(department);    
             }
@@ -78,7 +78,7 @@ namespace HW2.Model
         public void AddEntity(List<Department> departments)
         {
             int overFlowNumber = CalculateSum() + departments.Sum(x => x.CalculateSum());
-            if (departments != null|| overFlowNumber <= MaxNumberOfEmployees)
+            if (departments != null && overFlowNumber <= MaxNumberOfEmployees)
             {
                 FindDepartment(departments[0].ParentDepartment.Name).Departments.AddRange(departments);    
             }
@@ -90,7 +90,7 @@ namespace HW2.Model
         public void AddEntity(List<Employee> employees)
         {
             int overFlowNumber = CalculateSum() + employees.Count;
-            if (employees != null|| overFlowNumber <= MaxNumberOfEmployees)
+            if (employees != null && overFlowNumber <= MaxNumberOfEmployees)
             {
                 FindDepartment(employees[0].Department.Name).Employees.AddRange(employees);    
             }
@@ -120,7 +120,7 @@ namespace HW2.Model
         }
         public List<string> ListEntities()
         {
-            List<string> entities = new() {$"Dep {Name}"};
+            List<string> entities = new() {$"Dep {Name} {CalculateSum()} employees" };
             _employees.ForEach(x => entities.Add($"Emp {x.Name}"));
             _departments?.ForEach(x => entities.AddRange(x.ListEntities()));
             return entities;

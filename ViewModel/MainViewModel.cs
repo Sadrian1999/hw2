@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.System;
 
 namespace HW2.ViewModel
 {
@@ -53,6 +54,7 @@ namespace HW2.ViewModel
         [RelayCommand]
         void AddEmployee()
         {
+            if (IsEmptyEntry()) return;
             Employee employee = new Employee { Name = Name, StartOfWork = StartOfWork };
             bool isDepartmentExists = company.MainDepartment.IsDepartmentExsists(DepartmentName);
             if (isDepartmentExists)
@@ -72,6 +74,7 @@ namespace HW2.ViewModel
         [RelayCommand]
         void AddEmployees()
         {
+            if (IsEmptyEntry()) return;
             Employee employee = new Employee { Name = Name, StartOfWork = StartOfWork };
             bool isDepartmentExists = company.MainDepartment.IsDepartmentExsists(DepartmentName);
             if (isDepartmentExists)
@@ -94,6 +97,7 @@ namespace HW2.ViewModel
         [RelayCommand]
         void AddDepartment()
         {
+            if (IsEmptyEntry()) return;
             bool isDepartmentExists = company.MainDepartment.IsDepartmentExsists(Name);
             if (isDepartmentExists)
             {
@@ -111,6 +115,7 @@ namespace HW2.ViewModel
         [RelayCommand]
         void AddDepartments()
         {
+            if (IsEmptyEntry()) return;
             bool isDepartmentExists = company.MainDepartment.IsDepartmentExsists(Name);
             if (isDepartmentExists)
             {
@@ -133,7 +138,6 @@ namespace HW2.ViewModel
             MessageAreaUpdate();
         }
 
-
         private void MessageAreaUpdate()
         {
             if (company.MainDepartment.NotificationData != null)
@@ -141,6 +145,16 @@ namespace HW2.ViewModel
                 company.Notify();
                 MessageArea = $"{printObserver.PrintData()}\n\n{numberObserver.PrintOverFlowNumber}";
             }
+        }
+        private bool IsEmptyEntry()
+        {
+            if (Name == null || DepartmentName == null)
+            {
+                MessageArea = "Empty field not allowed!";
+                return true;
+            }
+            return false;
+
         }
         public MainViewModel()
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using HW2.View;
+using HW2.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace HW2
 {
@@ -19,6 +21,11 @@ namespace HW2
 		builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddSingleton<Main>();
+            builder.Services.AddSingleton<MainViewModel>();
+
+            builder.Services.AddTransient<CreateDepartment>();
+            builder.Services.AddTransient<CreateDepartmentViewModel>();
             return builder.Build();
         }
     }
