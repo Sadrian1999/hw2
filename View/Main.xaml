@@ -33,7 +33,7 @@
         <Button Text="Add Employee" Grid.Row="6" TextColor="Black" WidthRequest="120" 
                 FontSize="12" IsEnabled="{Binding IsEmployeePicked}" Command="{Binding AddEmployeeCommand}"/>
         <Button Text="Add Department" Grid.Row="6" Grid.Column="1" TextColor="Black" 
-                WidthRequest="125" FontSize="12" IsEnabled="{Binding IsDepartmentPicked}" Command="{Binding AddDepartmentCommand}"/>
+                WidthRequest="125" FontSize="12" IsEnabled="{Binding IsDepartmentPicked}" Command="{Binding OpenCommand}"/>
         
         <Button Text="Add Employees" Grid.Row="7" TextColor="Black" WidthRequest="120" 
                 FontSize="12" IsEnabled="{Binding IsEmployeeListPicked}" Command="{Binding AddEmployeesCommand}"/>

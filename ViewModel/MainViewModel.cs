@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HW2.Model;
+using HW2.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,6 +71,14 @@ namespace HW2.ViewModel
             }
             MessageAreaUpdate();
         }
+
+        [RelayCommand]
+        async Task Open()
+        {
+            await Shell.Current.GoToAsync(nameof(CreateDepartment));
+        }
+
+
 
         [RelayCommand]
         void AddEmployees()

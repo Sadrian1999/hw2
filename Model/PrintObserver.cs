@@ -13,7 +13,7 @@ namespace HW2.Model
             string str = "";
             if (_departments != null)
             {
-                _departments.ForEach(x => str += $"{x.Name}; ");
+                _departments.Where(x => x != null).ToList().ForEach(x => str += $"{x.Name}; ");         
             }
             else 
             {

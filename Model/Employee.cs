@@ -19,5 +19,6 @@ namespace HW2.Model
         {
             return 1;
         }
+        public override string ToString() => $"Name:\t{Name} Start of Work:\t{StartOfWork} Department:\t{Department}";
     }
 }
